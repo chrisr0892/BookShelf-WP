@@ -1,18 +1,17 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
+  entry: './src/index.js',
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.resolve(__dirname, 'dist'),
     filename: 'index.bundle.js',
+    publicPath: '/',
   },
   devServer: {
-    static: {
-      publicPath: '/dist',
-      directory: path.join(__dirname, 'dist'),
-    },
-    port: 3000,
     hot: true,
   },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   module: {
     rules: [
       {
