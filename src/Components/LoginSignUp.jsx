@@ -20,8 +20,11 @@ export const LoginSignUp = () => {
       },
       body: JSON.stringify(user),
     });
-    const data = await response.json();
+    const data = await response.json(); // Store the user data in localStorage
     if (data.message === 'User created') {
+      setUser(data.user); // Update the user state with the user data from the response
+      console.log(data.user, 'loginS');
+      localStorage.setItem('user', JSON.stringify(data.user)); // Store the user data in local storage
       // If the sign-up was successful, redirect to the profile page
       navigate('/profile');
     }
@@ -37,8 +40,12 @@ export const LoginSignUp = () => {
       body: JSON.stringify(user),
     });
     const data = await response.json();
+    // Store the user data in localStorage
 
     if (data.message === 'User found') {
+      setUser(data.user); // Update the user state with the user data from the response
+      console.log(user.data, 'loginS');
+      localStorage.setItem('user', JSON.stringify(user.data));
       // If the login was successful, redirect to the profile page
       navigate('/profile');
     } else {

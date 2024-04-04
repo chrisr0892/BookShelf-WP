@@ -21,9 +21,15 @@ userController.verifyUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email, password });
-    if (!user) res.locals.found = false;
-    else res.locals.found = true;
-    console.log('user found');
+    if (!user) {
+      res.locals.found = false;
+    } else {
+      res.locals.found = true;
+      res.locals.user = user; // Add the user object to res.locals
+      console.log('user found');
+      console.log(user.id);
+    }
+
     return next();
   } catch (error) {
     console.error('Error verifying user:', error);
@@ -31,5 +37,23 @@ userController.verifyUser = async (req, res, next) => {
     next(error);
   }
 };
+// userController.userProfile = async (req, res, next) => {
+//   try {
+//     const { email, password } = req.body;
+//     const user = await User.findOne({ email, password });
+//     if (!user) res.locals.found = false;
+//     else {
+//       res.locals.found = true;
+//       res.locals.user = user;
+//     }
+//     console.log(user);
+//     console.log('user found');
+//     return next();
+//   } catch (error) {
+//     console.error('Error verifying user:', error);
+//     res.status(500).json({ message: 'Error verifying user' });
+//     next(error);
+//   }
+// };
 
 module.exports = userController;

@@ -6,7 +6,7 @@ import UserContext from './UserContext.js';
 import { useState } from 'react';
 
 export const App = () => {
-  const [user, setUser] = useState({ name: '', email: '', password: '' });
+  const [user, setUser] = useState({ name: '', email: '', password: '', id: '' });
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <Router>
