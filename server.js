@@ -36,7 +36,9 @@ app.use(webpackHotMiddleware(compiler));
 app.get('/', (req, res) => res.status(200).json({}));
 
 // create new user
-app.post('/users', userController.createUser, (req, res) => res.status(200).json(res.locals.user));
+app.post('/users', userController.createUser, (req, res) =>
+  res.status(200).json({ message: 'User created' })
+);
 
 // verify user
 app.post('/login', userController.verifyUser, (req, res) => {

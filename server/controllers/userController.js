@@ -8,6 +8,8 @@ userController.createUser = async (req, res, next) => {
     const user = new User({ name, email, password });
     await user.save();
     res.locals.user = user;
+    console.log('user created');
+    console.log(user);
     return next();
   } catch (error) {
     console.error('Error creating user:', error);
@@ -24,8 +26,8 @@ userController.verifyUser = async (req, res, next) => {
     console.log('user found');
     return next();
   } catch (error) {
-    console.error('Error creating user:', error);
-    res.status(500).json({ message: 'Error creating user' });
+    console.error('Error verifying user:', error);
+    res.status(500).json({ message: 'Error verifying user' });
     next(error);
   }
 };
